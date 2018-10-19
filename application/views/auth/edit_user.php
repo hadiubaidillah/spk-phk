@@ -33,8 +33,13 @@
                   </div>
                   <br />
 
+<<<<<<< HEAD
                   <span style="display: none;"><?php echo lang('edit_user_company_label', 'company');?> <br /></span>
                   <div class="input-group minimal" style="display: none;">
+=======
+                  <?php echo lang('edit_user_company_label', 'company');?> <br />
+                  <div class="input-group minimal">
+>>>>>>> df0f9d9a52323c506d67ad61fe2f3a6cb32cc965
                     <?php echo form_input($company);?>
                     <span class="input-group-addon"><i class="entypo-user"></i></span>
                     <br>
