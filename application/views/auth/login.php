@@ -1,12 +1,14 @@
-    <div class="tile-title tile-blue">
+    <div class="tile-title tile-green" style="margin-top: -80px">
             <div class="icon">
               <i class="glyphicon glyphicon-lock"></i>
-            </div>
-
-            <div class="title">
-              <h3>SPK Penentuan Karyawan Unggulan Tingkat SMA Sederajat menggunakan Metode AHP</h3>
+              <h3>SPK PHK Dengan Metode AHP</h3>
               <p>Silahkan Login untuk melanjutkan</p>
             </div>
+
+            <!--<div class="title">
+              <h3>SPK PHK Dengan Metode AHP</h3>
+              <p>Silahkan Login untuk melanjutkan</p>
+            </div>-->
       </div>
         <div id="infoMessage">
             <?php echo $message; ?>

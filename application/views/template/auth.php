@@ -8,7 +8,7 @@
   <meta name="description" content="Neon Admin Panel" />
   <meta name="author" content="" />
 
-  <title>Ranking Karyawan | Login</title>
+  <title>SPK PHK | Login</title>
 
 
   <link rel="stylesheet" href="<?= base_url() ?>assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/neon-theme.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/neon-forms.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/custom.css">
-  <link rel="stylesheet" href="<?= base_url() ?>assets/css/skins/blue.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/css/skins/green.css">
 
   <script src="<?= base_url() ?>assets/js/jquery-1.11.0.min.js"></script>
 
@@ -39,7 +39,7 @@
 <div class="login-container" style="margin-top: 120px;">
 
   <div class="login-form">
-    <div class="login-content"  >
+    <div class="login-content" style="width: 400px" >
         <?php echo $contents; ?>
     </div>
 
