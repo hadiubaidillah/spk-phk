@@ -18,7 +18,7 @@
       </div>
       
       <div class="panel-body">
-      <?php echo form_open('admin/Auth/create_group', array('form'=>'form', 'class'=>'form-horizontal form-groups-bordered'));?>          <div class="form-group">
+      <?php echo form_open('Auth/create_group', array('form'=>'form', 'class'=>'form-horizontal form-groups-bordered'));?>          <div class="form-group">
             <label class="col-sm-3 control-label"></label>
             <div class="col-sm-5">
             <div id="infoMessage"><?php echo $message;?></div>
@@ -38,7 +38,7 @@
                    <br>
                 <div class="form-group">
                     <button type="submit" name="submit" class="btn btn-default">Tambah Grup</button>
-                    <?= anchor('admin/Auth', 'Batal', array('class'=>'btn btn-danger')) ?>
+                    <?= anchor('Auth', 'Batal', array('class'=>'btn btn-danger')) ?>
                  
                 </div>
             </div>

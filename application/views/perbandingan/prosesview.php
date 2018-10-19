@@ -34,12 +34,13 @@ $c=$this->m_db->get_query_row($sql,'m');
 if($c < 1)
 {
 	echo '<div class="alert alert-warning hidden-print" id="error">Seleksi belum diproses. Klik <a href="javascript:;" onclick="proseshitung();">di sini</a> untuk proses</div>';
-}else{	
+}else{
 ?>
 
-<br><br>
+<h2 style="margin-top:0px">Hasil Perhitungan</h2>
+
 <div class="table-responsive">
-	
+
 <table class="table table-bordered ">
 <thead>
 	<th>Nama Karyawan</th>
@@ -62,13 +63,13 @@ if($c < 1)
 	$dAlternatif=$this->m_db->get_data('alternatif');
 	if(!empty($dAlternatif))
 	{
-		
+
 		foreach($dAlternatif as $rAlternatif)
 		{
 			$alternatifID=$rAlternatif->id_alternatif;
 			$karyawanID=$rAlternatif->id_karyawan;
 			$nama_karyawan=field_value('karyawan','id_karyawan',$karyawanID,'nama_karyawan');
-			
+
 			?>
 			<tr>
 				<td><?=$nama_karyawan;?></td>
@@ -77,7 +78,7 @@ if($c < 1)
 				if(!empty($dKriteria))
 				{
 					foreach($dKriteria as $rKriteria)
-					{						
+					{
 						$kriteriaid=$rKriteria->id_kriteria;
 						$subkriteria=alternatif_nilai($alternatifID,$kriteriaid);
 						$nilaiID=field_value('subkriteria','id_subkriteria',$subkriteria,'id_nilai');
@@ -91,7 +92,7 @@ if($c < 1)
 				<td><?=number_format($total,2);?></td>
 				<!-- <td><?=ucwords($rAlternatif->status);?></td> -->
 				<td>
-					<?php 
+					<?php
 					if ($total >= 0.8) {
 						echo "Karyawan unggulan";
 					}else{
@@ -99,15 +100,15 @@ if($c < 1)
 						}
 					 ?>
 				</td>
-			</tr>			
+			</tr>
 			<?php
-			
+
 		}
-		
+
 	}else{
 		return false;
 	}
-	
+
 }
 ?>
 

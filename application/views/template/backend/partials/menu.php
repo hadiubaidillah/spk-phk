@@ -7,7 +7,7 @@
 			<div class="navbar-inner">
 				<!-- logo -->
 				<div class="navbar-brand">
-					<a href="<?= base_url('admin/Dashboard') ?>">
+					<a href="<?= base_url('Dashboard') ?>">
 						<img src="<?= base_url() ?>assets/images/logo@2x.png" width="88" alt="" />
 					</a>
 				</div>
@@ -17,7 +17,7 @@
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 					<!--<li><a href=" <?php echo base_url() ?> " target="_blank"><i class="entypo-monitor"></i><span>Halaman Depan</span></a></li>-->
-					<li <?php if($page=="Dashboard") echo 'class="active opened active" '; ?> ><?= anchor('admin/Dashboard','<i class=entypo-gauge></i><span>Dashboard</span>'); ?></li>
+					<li <?php if($page=="Dashboard") echo 'class="active opened active" '; ?> ><?= anchor('Dashboard','<i class=entypo-gauge></i><span>Dashboard</span>'); ?></li>
 					<li <?php if($pag =="Kriteria" || $pag =="kriteria" || $pag =="Subkriteria" || $pag =="subkriteria") echo 'class="active opened active multiple-expanded" '; ?>>
 						<a href="#">
 							<i class="entypo-layout"></i>
@@ -41,14 +41,10 @@
 						</ul>
 					</li>
 					<!--<li <?php if($page=="pesan" || $page=="Pesan") echo 'class="active opened active" '; ?>><?= anchor('pesan','<i class=entypo-mail></i><span>Pesan</span>'); ?></li>-->
+
+					<!--<li <?php if($pag=="Auth" || $pag=="auth") echo 'class="active opened active" '; ?>><?= anchor('Karyawan','<span class=entypo-user>User Management</span>'); ?></li>-->
 					<li <?php if($page=="Auth" ||$page=="auth") echo 'class="active opened active multiple-expanded" '; ?>>
-						<a href="#">
-							<i class="entypo-tools"></i>
-							<span>Pengaturan</span>
-						</a>
-						<ul>
-							<li <?php if($page=="Auth" || $page=="auth") echo 'class="active opened active multiple-expanded" '; ?>><?= anchor('admin/Auth','<span class=entypo-user> Users</span>'); ?></li>
-						</ul>
+						<?= anchor('Auth','<span class=entypo-user> Users</span>'); ?>
 					</li>
 					<li><a href="javascript:;" onclick="jQuery('#modal-1').modal('show');"><i class="entypo-help"></i><span>Tentang</span></a></li>
 				</ul>
@@ -63,7 +59,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="<?php echo base_url() ?>admin/Auth/logout">
+						<a href="<?php echo base_url() ?>Auth/logout">
 							Log Out <i class="entypo-logout right"></i>
 						</a>
 					</li>

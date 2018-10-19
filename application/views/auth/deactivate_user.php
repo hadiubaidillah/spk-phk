@@ -17,7 +17,7 @@
       </div>
       
       <div class="panel-body">
-      <?php echo form_open('admin/Auth/deactivate/'.$user->id, array('form'=>'form', 'class'=>'form-horizontal form-groups-bordered'));?>          <div class="form-group">
+      <?php echo form_open('Auth/deactivate/'.$user->id, array('form'=>'form', 'class'=>'form-horizontal form-groups-bordered'));?>          <div class="form-group">
             <?php echo form_hidden($csrf); ?>
   			<?php echo form_hidden(array('id'=>$user->id)); ?>
             <label class="col-sm-3 control-label"></label>
@@ -38,7 +38,7 @@
                   </div>
                 <div class="form-group">
                     <button type="submit" name="submit" class="btn btn-default">OK</button>
-                    <?= anchor('admin/Auth', 'Batal', array('class'=>'btn btn-danger')) ?>
+                    <?= anchor('Auth', 'Batal', array('class'=>'btn btn-danger')) ?>
                  
                 </div>
             </div>

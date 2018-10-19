@@ -11,7 +11,7 @@
         <div id="infoMessage">
             <?php echo $message; ?>
         </div>
-                <?php echo form_open("admin/Auth/login", array("role"=>"form"));?>
+                <?php echo form_open("Auth/login", array("role"=>"form"));?>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -46,7 +46,7 @@
                     </div>
 
                 <?php echo form_close();?>
-                <!--<p><?php echo anchor('admin/Auth/forgot_password', lang('login_forgot_password')); ?></p>-->
+                <!--<p><?php echo anchor('Auth/forgot_password', lang('login_forgot_password')); ?></p>-->
             </div>
 
         </div>
