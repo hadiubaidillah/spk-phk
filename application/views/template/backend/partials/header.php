@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="<?= base_url() ?>assets/css/neon-theme.css">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/css/neon-forms.css">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/css/custom.css">
-	<link rel="stylesheet" href="<?= base_url() ?>assets/css/skins/blue.css">
+	<link rel="stylesheet" href="<?= base_url() ?>assets/css/skins/green.css">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/libs/select2/select2.min.css"/>
 	<script src="<?= base_url() ?>assets/js/jquery-1.11.0.min.js"></script>
 	<script src="<?= base_url() ?>assets/libs/select2/select2.min.js"></script>
