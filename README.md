@@ -1,5 +1,5 @@
 # Sistem Pendukung Keputusan Pemutusan Hubungan Kerja dengan metode AHP menggunakan Framework Codeigniter
-# akses halaman admin localhost/spk_codeigniter/admin/auth
+# akses halaman admin localhost/spk-phk/admin/auth
 # email : admin@admin.com
 # password : password
 # credit : Hadi Ubaidillah / 081210336631
