@@ -38,7 +38,7 @@
                    <br>
                 <div class="form-group">
                     <button type="submit" name="submit" class="btn btn-default">Edit Grup</button>
-                    <?= anchor('admin/Auth', 'Batal', array('class'=>'btn btn-danger')) ?>
+                    <?= anchor('Auth', 'Batal', array('class'=>'btn btn-danger')) ?>
                  
                 </div>
             </div>

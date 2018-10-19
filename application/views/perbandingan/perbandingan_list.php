@@ -18,6 +18,7 @@ $(document).ready(function () {
 			},
 		});
 	});
+	$("#formcari").submit();
 });
 
 function showsubdata(kriteria)
@@ -40,11 +41,12 @@ function showsubdata(kriteria)
 }
 
 </script>
+<h2 style="margin-top:0px">Perbandingan</h2>
 <div class="row">
 	<?php
 	echo form_open('#',array('class'=>'form-horizontal','id'=>'formcari'));
 	?>
-	<div class="form-group">
+	<div class="form-group" style="display: none;">
 		<label class="col-sm-2 control-label">Silahkan Klik Untuk Memulai</label>
 		<button type="submit" class="btn btn-primary btn-flat">Tampilkan</button>
 	</div>

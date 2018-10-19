@@ -1137,10 +1137,10 @@ class CF_Http
             $this->cdnm_url = trim(substr($header, strlen(CDNM_URL)+1));
         }
         if (stripos($header, AUTH_TOKEN) === 0) {
-            $this->auth_token = trim(substr($header, strlen(AUTH_TOKEN)+1));
+            $this->auth_token = trim(substr($header, strlen('Auth_TOKEN)+1));
         }
         if (stripos($header, AUTH_TOKEN_LEGACY) === 0) {
-            $this->auth_token = trim(substr($header,strlen(AUTH_TOKEN_LEGACY)+1));
+            $this->auth_token = trim(substr($header,strlen('Auth_TOKEN_LEGACY)+1));
         }
         return strlen($header);
     }
