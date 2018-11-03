@@ -18,7 +18,7 @@ class Karyawan extends CI_Controller
     function index()
     {
 
-    	$sql="SELECT * FROM karyawan";
+    	$sql="SELECT * FROM karyawan ORDER BY nama_karyawan";
         $data['data']=$this->m_db->get_query_data($sql);
         $this->template->load('template/backend/dashboard', 'karyawan/karyawan_list', $data);
     }
