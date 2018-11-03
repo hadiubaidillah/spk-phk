@@ -4,7 +4,7 @@ class Perbandingan extends CI_Controller
 {
     function __construct()
     {
-        parent::__construct();        
+        parent::__construct();
         $this->load->library('Form_validation');
         $this->load->library('M_db');
 		$this->load->model('Kriteria_model','mod_kriteria');
@@ -12,9 +12,9 @@ class Perbandingan extends CI_Controller
 		$this->load->library('Ion_auth');
 		ceklogin();
     }
-    
+
      function banding()
-    {        
+    {
         $this->template->load('template/backend/dashboard', 'perbandingan/perbandingan_list');
     }
 
@@ -25,26 +25,26 @@ class Perbandingan extends CI_Controller
 		foreach($dKriteria as $rK)
 		{
 			$output[$rK->id_kriteria]=$rK->nama_kriteria;
-		}		
+		}
     	$d['arr']=$output;
     	// $this->template->load('template/backend/dashboard', 'perbandingan/matriks/matrikutama', $d);
     	$this->load->view('perbandingan/matriks/matrikutama', $d);
 	}
-	
+
 	function getsubcontainer()
 	{
 		$d['kriteria']=$this->mod_kriteria->kriteria_data();
 		$this->load->view('perbandingan/matriks/subcontainer',$d);
 	}
-	
+
 	function getsub()
-	{		
+	{
 		$id=$this->input->get('kriteria');
     	$namaKriteria=$this->mod_kriteria->kriteria_info($id,'nama_kriteria');
     	$dSub=$this->mod_kriteria->subkriteria_child($id,'id_nilai ASC');
     	$output=array();
     	if(!empty($dSub))
-    	{					
+    	{
 		foreach($dSub as $rK)
 		{
 			$nama=field_value('nilai_kategori','id_nilai',$rK->id_nilai,'nama_nilai');
@@ -65,7 +65,7 @@ class Perbandingan extends CI_Controller
     	'id_kriteria_nilai !='=>''
     	);
     	$this->m_db->delete_row('kriteria_nilai',$s);
-    	    	
+
     	$cr=$this->input->post('crvalue');
     	if($cr > 0.01)
     	{
@@ -75,7 +75,7 @@ class Perbandingan extends CI_Controller
 			foreach($_POST as $k=>$v)
 			{
 				if($k!="crvalue" )
-				{									
+				{
 				foreach($v as $x=>$x2)
 				{
 					$d=array(
@@ -90,15 +90,15 @@ class Perbandingan extends CI_Controller
 			$msg="Berhasil update nilai kriteria";
 			$error=FALSE;
 		}
-    			
-    	
+
+
     	if($error==FALSE)
-    	{			
+    	{
 			echo json_encode(array('status'=>'ok','msg'=>$msg));
 		}else{
 			echo json_encode(array('status'=>'no','msg'=>$msg));
 		}
-		
+
 	}
 
 	function updatesub()
@@ -112,7 +112,7 @@ class Perbandingan extends CI_Controller
     	'id_kriteria'=>$kriteriaid,
     	);
     	$this->m_db->delete_row('subkriteria_nilai',$s);
-    	    	
+
     	$cr=$this->input->post('crvalue');
     	if($cr > 0.01)
     	{
@@ -122,7 +122,7 @@ class Perbandingan extends CI_Controller
 			foreach($_POST as $k=>$v)
 			{
 				if($k!="crvalue" && $k!="kriteriaid")
-				{									
+				{
 				foreach($v as $x=>$x2)
 				{
 					$d=array(
@@ -138,20 +138,20 @@ class Perbandingan extends CI_Controller
 			$msg="Berhasil update nilai subkriteria";
 			$error=FALSE;
 		}
-    			
-    	
+
+
     	if($error==FALSE)
-    	{			
+    	{
 			echo json_encode(array('status'=>'ok','msg'=>$msg));
 		}else{
 			echo json_encode(array('status'=>'no','msg'=>$msg));
 		}
-		
+
 		}else{
 			$msg="Gagal mengubah nilai subkriteria";
 			echo json_encode(array('status'=>'no','msg'=>$msg));
 		}
-		
+
 	}
 
 		function updatesubprioritas()
@@ -173,7 +173,7 @@ class Perbandingan extends CI_Controller
 					);
 					$this->m_db->add_row('subkriteria_hasil',$d);
 				}else{
-					$d=array(					
+					$d=array(
 					'prioritas'=>$rv,
 					);
 					$this->m_db->edit_row('subkriteria_hasil',$d,$s);
@@ -188,14 +188,14 @@ class Perbandingan extends CI_Controller
 	function hasil()
 	{
 		$this->template->load('template/backend/dashboard', 'perbandingan/prosesview');
-        
+
 	}
 
 
 
 	function proseshitung()
 	{
-		$this->mod_pro->proseshitung();		
+		$this->mod_pro->proseshitung();
 		if($this->mod_pro->proseshitung()==TRUE)
 		{
 			//set_header_message('success','Proses Beasiswa','Beasiswa telah diproses');
@@ -205,8 +205,8 @@ class Perbandingan extends CI_Controller
 			//set_header_message('danger','Proses Beasiswa','Beasiswa gagal diproses');
 			//redirect(base_url(akses().'/beasiswa/beasiswa'));
 			echo json_encode(array('status'=>'no'));
-		}	
+		}
 	}
-    
-    
+
+
 }

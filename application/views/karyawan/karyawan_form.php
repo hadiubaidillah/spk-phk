@@ -14,7 +14,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="">Nama Karyawan <?php echo form_error('nama_karyawan') ?></label>
 		<div class="col-md-4">
-			<input type="text" class="form-control" name="nama_karyawan" id="nama_karyawan" placeholder="Nama Karyawan" value="<?php echo $karyawan->nama_karyawan; ?>" />
+			<input type="text" class="form-control" name="nama_karyawan" id="nama_karyawan" placeholder="Nama Karyawan" value="<?php echo (isset($karyawan)?$karyawan->nama_karyawan:""); ?>" />
 		</div>
 	</div>
 </div><br>
@@ -22,10 +22,10 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="">Jabatan Karyawan <?php echo form_error('jabatan_karyawan') ?></label>
 		<div class="col-md-6">
-			<input type="text" class="form-control" name="jabatan_karyawan" id="jabatan_karyawan" placeholder="Jabatan Karyawan" value="<?php echo $karyawan->jabatan_karyawan; ?>" />
+			<input type="text" class="form-control" name="jabatan_karyawan" id="jabatan_karyawan" placeholder="Jabatan Karyawan" value="<?php echo (isset($karyawan)?$karyawan->jabatan_karyawan:""); ?>" />
 		</div>
 	</div>
-</div><br>
+</div><br><br>
 <div class="row">
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="">Penilaian</label>
@@ -102,7 +102,7 @@
 			<button type="submit" name="submit" class="btn btn-primary btn-flat"><?php echo $tipe_form; ?></button>
 			<a href="javascript:history.back(-1);" class="btn btn-default btn-flat">Batal</a>
 		<?php } else{ ?>
-			<button type="submit" name="submit" class="btn btn-primary btn-flat" disabled><?php echo $tipe_form; ?></button>
+			<button type="submit" name="submit" class="btn btn-primary btn-flat"><?php echo $tipe_form; ?></button>
 			<a href="javascript:history.back(-1);" class="btn btn-default btn-flat">Batal</a>
 		<?php } ?>
 		</div>

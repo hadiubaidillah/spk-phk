@@ -43,7 +43,7 @@ class Karyawan extends CI_Controller
 				$listKaryawan=substr($listKaryawan,0,-1);
 
 				$sql="Select * from karyawan Where id_karyawan NOT IN ($listKaryawan)";
-				$d['karyawan']=$this->m_db->get_query_data($sql)->row();
+				$d['karyawan']=$this->m_db->get_query_data($sql);
 				$d['kriteria']=$this->mod_kriteria->kriteria_data();
 	        	$this->template->load('template/backend/dashboard', 'karyawan/karyawan_form', $d);
 			}else{
