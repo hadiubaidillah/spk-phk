@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Alternatif_model extends CI_Model
+class Karyawan_model extends CI_Model
 {
 
-    public $table = 'alternatif';
-    private $tb_karyawan='alternatif';
-    public $id = 'id_alternatif';
+    public $table = 'karyawan';
+    private $tb_karyawan='karyawan';
+    public $id = 'id_karyawan';
     public $order = 'DESC';
 
-	  private $tb_alternatif='alternatif';
+	  private $tb_karyawan='karyawan';
 
     function __construct()
     {
@@ -16,7 +16,7 @@ class Alternatif_model extends CI_Model
     }
 
 
-	function alternatif_add($id_karyawan,$kriteriaData=array(), $sub=array(), $is_update=FALSE)
+	function karyawan_add($id_karyawan,$kriteriaData=array(), $sub=array(), $is_update=FALSE)
 	{
         if($this->m_db->is_bof('karyawan')==FALSE)
         {
@@ -25,20 +25,20 @@ class Alternatif_model extends CI_Model
 				$d=array(
 				'id_karyawan'=>$id_karyawan,
 				);
-				if($this->m_db->add_row('alternatif',$d)==TRUE)
+				if($this->m_db->add_row('karyawan',$d)==TRUE)
 				{
-					$alternatifID=$this->m_db->last_insert_id();
+					$karyawanID=$this->m_db->last_insert_id();
 					foreach($kriteriaData as $rK=>$rV)
 					{
 						$d2=array(
-						'id_alternatif'=>$alternatifID,
+						'id_karyawan'=>$karyawanID,
 						'id_kriteria'=>$rK,
 						'id_subkriteria'=>$rV,
 						'id_nilai'=>$rV,
 						);
-						$this->m_db->add_row('alternatif_nilai',$d2);
+						$this->m_db->add_row('karyawan_nilai',$d2);
 					}
-					if($is_update == FALSE) redirect('Alternatif','refresh');
+					if($is_update == FALSE) redirect('Karyawan','refresh');
           else return true;
 				}else{
 					//echo "GAGAL TAMBAH PESERTA";
@@ -55,31 +55,31 @@ class Alternatif_model extends CI_Model
 	}
 
 
-	/*function alternatif_update($id_alternatif, $id_karyawan, $kriteriaData=array(), $sub=array())
+	/*function karyawan_update($id_karyawan, $id_karyawan, $kriteriaData=array(), $sub=array())
 	{
     if($this->m_db->is_bof('karyawan')==FALSE)
     {
     	if(!empty($kriteriaData))
     	{
 				$d=array(
-          'id_alternatif'=>$id_alternatif,
+          'id_karyawan'=>$id_karyawan,
           'id_karyawan'=>$id_karyawan,
         );
 
-				if($this->m_db->edit_row('alternatif',$d)==TRUE)
+				if($this->m_db->edit_row('karyawan',$d)==TRUE)
 				{
-					$alternatifID=$this->m_db->last_insert_id();
+					$karyawanID=$this->m_db->last_insert_id();
 					foreach($kriteriaData as $rK=>$rV)
 					{
 						$d2=array(
-						'id_alternatif'=>$alternatifID,
+						'id_karyawan'=>$karyawanID,
 						'id_kriteria'=>$rK,
 						'id_subkriteria'=>$rV,
 						'id_nilai'=>$rV,
 						);
-						$this->m_db->edit_row('alternatif_nilai',$d2);
+						$this->m_db->edit_row('karyawan_nilai',$d2);
 					}
-					redirect('Alternatif','refresh');
+					redirect('Karyawan','refresh');
 				}
 			}else{
 				//echo "DATA KRITERIA TAK ADA";
@@ -91,12 +91,12 @@ class Alternatif_model extends CI_Model
 		}
 	}*/
 
-	function alternatif_delete($id_alternatif)
+	function karyawan_delete($id_karyawan)
 	{
 		$s=array(
-		'id_alternatif'=>$id_alternatif,
+		'id_karyawan'=>$id_karyawan,
 		);
-		if($this->m_db->delete_row($this->tb_alternatif,$s)==TRUE)
+		if($this->m_db->delete_row($this->tb_karyawan,$s)==TRUE)
 		{
 			return true;
 		}else{

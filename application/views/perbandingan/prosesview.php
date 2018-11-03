@@ -19,7 +19,7 @@ function proseshitung()
 				alert('Proses seleksi berhasil. Halaman akan direfresh');
 				window.location=window.location;
 			}else{
-				$("#respon").html('Proses hitung seleksi Alternatif gagal');
+				$("#respon").html('Proses hitung seleksi Karyawan gagal');
 				$("#error").show();
 			}
 		},
@@ -29,7 +29,7 @@ function proseshitung()
 
 <div id="respon" class="hidden-print"></div>
 <?php
-$sql="Select COUNT(*) as m FROM alternatif WHERE status IN ('unggulan','belum unggulan')";
+$sql="Select COUNT(*) as m FROM karyawan WHERE status IN ('unggulan','belum unggulan')";
 $c=$this->m_db->get_query_row($sql,'m');
 if($c < 1)
 {
@@ -60,14 +60,14 @@ if($c < 1)
 <?php
 
 
-	$dAlternatif=$this->m_db->get_data('alternatif');
-	if(!empty($dAlternatif))
+	$dKaryawan=$this->m_db->get_data('karyawan');
+	if(!empty($dKaryawan))
 	{
 
-		foreach($dAlternatif as $rAlternatif)
+		foreach($dKaryawan as $rKaryawan)
 		{
-			$alternatifID=$rAlternatif->id_alternatif;
-			$karyawanID=$rAlternatif->id_karyawan;
+			$karyawanID=$rKaryawan->id_karyawan;
+			$karyawanID=$rKaryawan->id_karyawan;
 			$nama_karyawan=field_value('karyawan','id_karyawan',$karyawanID,'nama_karyawan');
 
 			?>
@@ -80,7 +80,7 @@ if($c < 1)
 					foreach($dKriteria as $rKriteria)
 					{
 						$kriteriaid=$rKriteria->id_kriteria;
-						$subkriteria=alternatif_nilai($alternatifID,$kriteriaid);
+						$subkriteria=karyawan_nilai($karyawanID,$kriteriaid);
 						$nilaiID=field_value('subkriteria','id_subkriteria',$subkriteria,'id_nilai');
 						$nilai=field_value('nilai_kategori','id_nilai',$nilaiID,'nama_nilai');
 						$prioritas=ambil_prioritas($subkriteria);
@@ -90,7 +90,7 @@ if($c < 1)
 				}
 				?>
 				<td><?=number_format($total,2);?></td>
-				<!-- <td><?=ucwords($rAlternatif->status);?></td> -->
+				<!-- <td><?=ucwords($rKaryawan->status);?></td> -->
 				<td>
 					<?php
 					if ($total >= 0.8) {

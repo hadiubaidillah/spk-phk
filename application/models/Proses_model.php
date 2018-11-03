@@ -13,14 +13,14 @@ class Proses_model extends CI_Model
 	function proseshitung()
 	{
 		$dKriteria=$this->mod_kriteria->kriteria_data();
-			$dAlternatif=$this->m_db->get_data('alternatif');
-			if(!empty($dAlternatif))
+			$dKaryawan=$this->m_db->get_data('karyawan');
+			if(!empty($dKaryawan))
 			{
 				
-				foreach($dAlternatif as $rAlternatif)
+				foreach($dKaryawan as $rKaryawan)
 				{
-					$alternatifID=$rAlternatif->id_alternatif;
-					$karyawanID=$rAlternatif->id_karyawan;
+					$karyawanID=$rKaryawan->id_karyawan;
+					$karyawanID=$rKaryawan->id_karyawan;
 					$nama_karyawan=field_value('karyawan','id_karyawan',$karyawanID,'nama_karyawan');			
 					if(!empty($dKriteria))
 					{
@@ -28,7 +28,7 @@ class Proses_model extends CI_Model
 						foreach($dKriteria as $rKriteria)
 						{						
 							$kriteriaid=$rKriteria->id_kriteria;
-							$subkriteria=alternatif_nilai($alternatifID,$kriteriaid);
+							$subkriteria=karyawan_nilai($karyawanID,$kriteriaid);
 							$nilaiID=field_value('subkriteria','id_subkriteria',$subkriteria,'id_nilai');
 							$nilai=field_value('nilai_kategori','id_nilai',$nilaiID,'nama_nilai');
 							$prioritas=ambil_prioritas($subkriteria);
@@ -37,14 +37,14 @@ class Proses_model extends CI_Model
 					}
 					
 					$shasil=array(
-					'id_alternatif'=>$alternatifID,
+					'id_karyawan'=>$karyawanID,
 					);
 					$dhasil=array(
 					'total'=>$total,
 					);
-					$this->m_db->edit_row('alternatif',$dhasil,$shasil);
+					$this->m_db->edit_row('karyawan',$dhasil,$shasil);
 			
-					$dPH=$this->m_db->get_data('alternatif');
+					$dPH=$this->m_db->get_data('karyawan');
 					$kuota = 100;
 					$rank=0;
 					foreach($dPH as $rPH)
@@ -61,7 +61,7 @@ class Proses_model extends CI_Model
 							'status'=>'Belum Unggulan',
 							);
 						}
-						$this->m_db->edit_row('alternatif',$d,array('id_alternatif'=>$rPH->id_alternatif));
+						$this->m_db->edit_row('karyawan',$d,array('id_karyawan'=>$rPH->id_karyawan));
 					}
 					
 					return true;

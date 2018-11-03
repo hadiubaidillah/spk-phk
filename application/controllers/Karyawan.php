@@ -1,233 +1,126 @@
 <?php
-
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Karyawan extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Karyawan_model');
         $this->load->library('Form_validation');
-        $this->load->library('Ion_auth');
-        ceklogin();
+        $this->load->library('M_db');
+    		$this->load->model('Karyawan_model','mod_karyawan');
+    		$this->load->model('Kriteria_model','mod_kriteria');
+    		$this->load->library('Ion_auth');
+    		ceklogin();
+
     }
 
-    public function index()
+    function index()
     {
-        $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->input->get('start'));
 
-        if ($q <> '') {
-            $config['base_url'] = base_url() . 'karyawan/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'karyawan/index.html?q=' . urlencode($q);
-        } else {
-            $config['base_url'] = base_url() . 'karyawan/index.html';
-            $config['first_url'] = base_url() . 'karyawan/index.html';
-        }
-
-        $config['per_page'] = 10;
-        $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->Karyawan_model->total_rows($q);
-        $karyawan = $this->Karyawan_model->get_limit_data($config['per_page'], $start, $q);
-
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-
-        $data = array(
-            'karyawan_data' => $karyawan,
-            'q' => $q,
-            'pagination' => $this->pagination->create_links(),
-            'total_rows' => $config['total_rows'],
-            'start' => $start,
-        );
+    	$sql="SELECT * FROM karyawan";
+        $data['data']=$this->m_db->get_query_data($sql);
         $this->template->load('template/backend/dashboard', 'karyawan/karyawan_list', $data);
     }
 
-    public function read($id)
+    function create()
     {
-        $row = $this->Karyawan_model->get_by_id($id);
-        if ($row) {
-            $data = array(
-		'id_karyawan' => $row->id_karyawan,
-		'nama_karyawan' => $row->nama_karyawan,
-		'nama_kepsek' => $row->nama_kepsek,
-		'alamat_karyawan' => $row->alamat_karyawan,
-		'visi' => $row->visi,
-		'misi' => $row->misi,
-		'no_telpon' => $row->no_telpon,
-	    );
-            $this->template->load('template/backend/dashboard', 'karyawan/karyawan_read', $data);
+
+			$id_karyawan=$this->input->post('id_karyawan');
+      $nama_karyawan=$this->input->post('nama_karyawan');
+      $jabatan_karyawan=$this->input->post('jabatan_karyawan');
+			$kriteria=$this->input->post('kriteria');
+			$this->mod_karyawan->karyawan_add($id_karyawan,$nama_karyawan,$jabatan_karyawan,$kriteria);
+
+			$d2=$this->m_db->get_data('karyawan');
+			if(!empty($d2))
+			{
+				$listKaryawan="";
+				foreach($d2 as $r)
+				{
+					$listKaryawan.=$r->id_karyawan.",";
+				}
+				$listKaryawan=substr($listKaryawan,0,-1);
+
+				$sql="Select * from karyawan Where id_karyawan NOT IN ($listKaryawan)";
+				$d['karyawan']=$this->m_db->get_query_data($sql)->row();
+				$d['kriteria']=$this->mod_kriteria->kriteria_data();
+	        	$this->template->load('template/backend/dashboard', 'karyawan/karyawan_form', $d);
+			}else{
+
+	        $d['karyawan']=$this->mod_karyawan->karyawan_data();
+	        $d['kriteria']=$this->mod_kriteria->kriteria_data();
+	        $this->template->load('template/backend/dashboard', 'karyawan/karyawan_form', $d);
+	    }
+
+	}
+
+  public function update($id)
+  {
+
+      $nama_karyawan=$this->input->post('nama_karyawan');
+      $jabatan_karyawan=$this->input->post('jabatan_karyawan');
+      $kriteria=$this->input->post('kriteria');
+      if(isset($nama_karyawan) && isset($kriteria)) {
+        echo "<script>alert('disini')</script>";
+        //$dSub=$this->m_db->get_data('subkriteria',array('id_karyawan'=>$id_karyawan));
+        $dSub=$this->db->query("SELECT a.*, b.* FROM karyawan a LEFT JOIN karyawan_nilai b ON a.id_karyawan = b.id_karyawan WHERE a.id_karyawan=".$id)->result();
+        //echo $this->db->last_query();
+        //die();
+        if($this->mod_karyawan->karyawan_add($id_karyawan,$nama_karyawan,$jabatan_karyawan,$kriteria,null,true)) {
+          echo "<h1>asdf</h1>";
+          //die();
+          foreach($dSub as $rSub)
+          {
+              $s=array( 'id_karyawan'=>$id );
+              if($this->mod_karyawan->karyawan_delete($rSub->id_karyawan) && $this->m_db->delete_row('karyawan_nilai',$s)==TRUE) {
+                echo "<h1>bisa</h1>";
+                redirect('Karyawan');
+              }
+          }
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('karyawan'));
+          echo "<h1>gagal</h1>";
+          die();
         }
-    }
+      }
 
-    public function create()
-    {
-        $data = array(
-            'button' => 'Create',
-            'action' => site_url('karyawan/create_action'),
-	    'id_karyawan' => set_value('id_karyawan'),
-	    'nama_karyawan' => set_value('nama_karyawan'),
-	    'nama_kepsek' => set_value('nama_kepsek'),
-	    'alamat_karyawan' => set_value('alamat_karyawan'),
-	    'visi' => set_value('visi'),
-	    'misi' => set_value('misi'),
-	    'no_telpon' => set_value('no_telpon'),
-	);
-        $this->template->load('template/backend/dashboard', 'karyawan/karyawan_form', $data);
-    }
+      $this->db->where('id_karyawan', $id);
+      $row = $this->db->get('karyawan')->row();
 
-    public function create_action()
-    {
-        $this->_rules();
+      $karyawan = $this->mod_karyawan->get_by_id($id);
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->create();
-        } else {
-            $data = array(
-        		'nama_karyawan' => $this->input->post('nama_karyawan',TRUE),
-        		'nama_kepsek' => $this->input->post('nama_kepsek',TRUE),
-        		'alamat_karyawan' => $this->input->post('alamat_karyawan',TRUE),
-        		'visi' => $this->input->post('visi',TRUE),
-        		'misi' => $this->input->post('misi',TRUE),
-        		'no_telpon' => $this->input->post('no_telpon',TRUE),
-	    );
+			$d2=$this->m_db->get_data('karyawan');
+			if(!empty($d2))
+			{
+				$listKaryawan="";
+				foreach($d2 as $r)
+				{
+					$listKaryawan.=$r->id_karyawan.",";
+				}
+				$listKaryawan=substr($listKaryawan,0,-1);
 
-            $this->Karyawan_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('karyawan'));
-        }
-    }
+				$sql="select * from karyawan Where id_karyawan = '".$karyawan->id_karyawan."'";
+				$d['karyawan']=$karyawan;
+				$d['kriteria']=$this->mod_kriteria->kriteria_data();
+	        	$this->template->load('template/backend/dashboard', 'karyawan/karyawan_form', $d);
+			}else{
 
-    public function update($id)
-    {
-        $row = $this->Karyawan_model->get_by_id($id);
+	        $d['karyawan']=$this->mod_karyawan->karyawan_data();
+	        $d['kriteria']=$this->mod_kriteria->kriteria_data();
+	        $this->template->load('template/backend/dashboard', 'karyawan/karyawan_form', $d);
+	    }
 
-        if ($row) {
-            $data = array(
-                'button' => 'Update',
-                'action' => site_url('karyawan/update_action'),
-            		'id_karyawan' => set_value('id_karyawan', $row->id_karyawan),
-            		'nama_karyawan' => set_value('nama_karyawan', $row->nama_karyawan),
-            		'nama_kepsek' => set_value('nama_kepsek', $row->nama_kepsek),
-            		'alamat_karyawan' => set_value('alamat_karyawan', $row->alamat_karyawan),
-            		'visi' => set_value('visi', $row->visi),
-            		'misi' => set_value('misi', $row->misi),
-            		'no_telpon' => set_value('no_telpon', $row->no_telpon),
-            	    );
-            $this->template->load('template/backend/dashboard', 'karyawan/karyawan_form', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('karyawan'));
-        }
-    }
+  }
 
-    public function update_action()
-    {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id_karyawan', TRUE));
-        } else {
-            $data = array(
-		'nama_karyawan' => $this->input->post('nama_karyawan',TRUE),
-		'nama_kepsek' => $this->input->post('nama_kepsek',TRUE),
-		'alamat_karyawan' => $this->input->post('alamat_karyawan',TRUE),
-		'visi' => $this->input->post('visi',TRUE),
-		'misi' => $this->input->post('misi',TRUE),
-		'no_telpon' => $this->input->post('no_telpon',TRUE),
-	    );
-
-            $this->Karyawan_model->update($this->input->post('id_karyawan', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('karyawan'));
-        }
-    }
-
-    public function delete($id)
-    {
-        $row = $this->Karyawan_model->get_by_id($id);
-
-        if ($row) {
-            $this->Karyawan_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('karyawan'));
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('karyawan'));
-        }
-    }
-
-    public function _rules()
-    {
-	$this->form_validation->set_rules('nama_karyawan', 'nama karyawan', 'trim|required');
-	$this->form_validation->set_rules('nama_kepsek', 'nama kepsek', 'trim|required');
-	$this->form_validation->set_rules('alamat_karyawan', 'alamat karyawan', 'trim|required');
-	$this->form_validation->set_rules('visi', 'visi', 'trim|required');
-	$this->form_validation->set_rules('misi', 'misi', 'trim|required');
-	$this->form_validation->set_rules('no_telpon', 'no telpon', 'trim|required');
-
-	$this->form_validation->set_rules('id_karyawan', 'id_karyawan', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-    }
-
-    public function excel()
-    {
-        $this->load->helper('exportexcel');
-        $namaFile = "karyawan.xls";
-        $judul = "karyawan";
-        $tablehead = 0;
-        $tablebody = 1;
-        $nourut = 1;
-        //penulisan header
-        header("Pragma: public");
-        header("Expires: 0");
-        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
-        header("Content-Type: application/force-download");
-        header("Content-Type: application/octet-stream");
-        header("Content-Type: application/download");
-        header("Content-Disposition: attachment;filename=" . $namaFile . "");
-        header("Content-Transfer-Encoding: binary ");
-
-        xlsBOF();
-
-        $kolomhead = 0;
-        xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama Karyawan");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama Kepsek");
-	xlsWriteLabel($tablehead, $kolomhead++, "Alamat Karyawan");
-	xlsWriteLabel($tablehead, $kolomhead++, "Visi");
-	xlsWriteLabel($tablehead, $kolomhead++, "Misi");
-	xlsWriteLabel($tablehead, $kolomhead++, "No Telpon");
-
-	foreach ($this->Karyawan_model->get_all() as $data) {
-            $kolombody = 0;
-
-            //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
-            xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_karyawan);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_kepsek);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->alamat_karyawan);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->visi);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->misi);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->no_telpon);
-
-	    $tablebody++;
-            $nourut++;
-        }
-
-        xlsEOF();
-        exit();
-    }
+	function hapus()
+	{
+		$id=$this->input->get('karyawan');
+		if($this->mod_karyawan->karyawan_delete($id)==TRUE)
+		{
+			redirect('karyawan');
+		}else{
+			redirect('karyawan');
+		}
+	}
 
 }
-
-/* End of file Karyawan.php */
-/* Location: ./application/controllers/Karyawan.php */
-/* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2017-07-23 05:12:40 */
-/* http://harviacode.com */

@@ -8,7 +8,7 @@
 				<!-- logo -->
 				<div class="navbar-brand">
 					<a href="<?= base_url('Dashboard') ?>">
-						<img src="<?= base_url() ?>assets/images/logo@2x.png" width="88" alt="" />
+						<img src="<?= base_url() ?>assets/images/logo@2x.png" width="88" height="16" alt="" />
 					</a>
 				</div>
 
@@ -28,14 +28,13 @@
 							<li <?php if($pag=="Subkriteria" || $pag=="subkriteria") echo 'class="active opened active multiple-expanded" '; ?>><?= anchor('Subkriteria','<span class=entypo-menu> Subkriteria</span>'); ?></li>
 						</ul>
 					</li>
-					<li <?php if($pag=="Karyawan" || $pag=="Karyawan") echo 'class="active opened active" '; ?>><?= anchor('Karyawan','<i class=entypo-doc-text></i><span>Karyawan</span>'); ?></li>
-					<li <?php if($pag=="Alternatif" || $pag=="alternatif" || $page=="Banding" || $page=="banding" || $page=="Hasil" || $page=="hasil") echo 'class="active opened active multiple-expanded" '; ?>>
+					<li <?php if($pag=="Karyawan" || $pag=="karyawan") echo 'class="active opened active" '; ?>><?= anchor('Karyawan','<i class=entypo-doc-text></i><span>Karyawan</span>'); ?></li>
+					<li <?php if($page=="Banding" || $page=="banding" || $page=="Hasil" || $page=="hasil") echo 'class="active opened active multiple-expanded" '; ?>>
 						<a href="#">
 							<i class="entypo-book"></i>
 							<span>Perhitungan</span>
 						</a>
 						<ul>
-							<li <?php if($pag=="alternatif" || $pag=="Alternatif") echo 'class="active opened active multiple-expanded" '; ?>><?= anchor('Alternatif','<span class=entypo-direction>Alternatif</span>'); ?></li>
 							<li <?php if($page=="banding" || $page=="Banding") echo 'class="active opened active multiple-expanded" '; ?>><?= anchor('Perbandingan/banding','<span class=entypo-switch> Perbandingan</span>'); ?></li>
 							<li <?php if($page=="hasil" || $page=="Hasil") echo 'class="active opened active multiple-expanded" '; ?>><?= anchor('Perbandingan/hasil','<span class=entypo-chart-bar>Hasil Perhitungan</span>'); ?></li>
 						</ul>
@@ -44,14 +43,14 @@
 
 					<!--<li <?php if($pag=="Auth" || $pag=="auth") echo 'class="active opened active" '; ?>><?= anchor('Karyawan','<span class=entypo-user>User Management</span>'); ?></li>-->
 					<li <?php if($page=="Auth" ||$page=="auth") echo 'class="active opened active multiple-expanded" '; ?>>
-						<?= anchor('Auth','<span class=entypo-user> Users</span>'); ?>
+						<?= anchor('Auth','<span class=entypo-user> Pengguna</span>'); ?>
 					</li>
-					<li><a href="javascript:;" onclick="jQuery('#modal-1').modal('show');"><i class="entypo-help"></i><span>Tentang</span></a></li>
+					<!--<li><a href="javascript:;" onclick="jQuery('#modal-1').modal('show');"><i class="entypo-help"></i><span>Tentang</span></a></li>-->
 				</ul>
 
 
 				<!-- notifications and other links -->
-				<ul class="nav navbar-right pull-right">
+				<ul class="nav navbar-right pull-right" style="height: 16px;">
 					<li>
 						<a href="#">
     					<!--<img src="<?= base_url() ?>assets/images/thumb-1@2xx.png" alt="" class="img-circle" width="44" />-->

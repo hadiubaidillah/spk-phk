@@ -10,27 +10,27 @@ class Frontend_model extends CI_Model
     
     function tampilkan_data(){
     	// $sql = " SELECT
-					// alternatif.status,
-					// alternatif.total,
+					// karyawan.status,
+					// karyawan.total,
 					// karyawan.nama_karyawan,
 					// karyawan.alamat_karyawan,
 					// karyawan.id_karyawan,
-					// alternatif.id_karyawan,
-					// alternatif.id_alternatif
+					// karyawan.id_karyawan,
+					// karyawan.id_karyawan
 					// FROM
-					// alternatif
-					// INNER JOIN karyawan ON karyawan.id_karyawan = alternatif.id_karyawan ORDER BY total DESC ";
+					// karyawan
+					// INNER JOIN karyawan ON karyawan.id_karyawan = karyawan.id_karyawan ORDER BY total DESC ";
     	$sql = " SELECT
-					alternatif.status,
-					alternatif.total,
+					karyawan.status,
+					karyawan.total,
 					karyawan.nama_karyawan,
 					karyawan.alamat_karyawan,
 					karyawan.id_karyawan,
-					alternatif.id_karyawan,
-					alternatif.id_alternatif
+					karyawan.id_karyawan,
+					karyawan.id_karyawan
 					FROM
-					alternatif
-					INNER JOIN karyawan ON karyawan.id_karyawan = alternatif.id_karyawan ORDER BY total DESC ";
+					karyawan
+					INNER JOIN karyawan ON karyawan.id_karyawan = karyawan.id_karyawan ORDER BY total DESC ";
     	return $this->db->query($sql);
     }
 
@@ -38,14 +38,14 @@ class Frontend_model extends CI_Model
   		// $param = array('id_karyawan' =>$id_karyawan);
 		// return $this->db->get_where('karyawan', $param);
 		$sql = " SELECT
-					alternatif_nilai.id_alternatif_nilai,
-					alternatif_nilai.id_alternatif,
-					alternatif_nilai.id_kriteria,
-					alternatif_nilai.id_subkriteria,
-					alternatif.id_alternatif,
-					alternatif.id_karyawan,
-					alternatif.status,
-					alternatif.total,
+					karyawan_nilai.id_karyawan_nilai,
+					karyawan_nilai.id_karyawan,
+					karyawan_nilai.id_kriteria,
+					karyawan_nilai.id_subkriteria,
+					karyawan.id_karyawan,
+					karyawan.id_karyawan,
+					karyawan.status,
+					karyawan.total,
 					kriteria.id_kriteria,
 					kriteria.nama_kriteria,
 					subkriteria.id_subkriteria,
@@ -59,11 +59,11 @@ class Frontend_model extends CI_Model
 					karyawan.misi,
 					karyawan.no_telpon
 					FROM
-					alternatif_nilai
-					INNER JOIN alternatif ON alternatif_nilai.id_alternatif = alternatif.id_alternatif
-					INNER JOIN kriteria ON alternatif_nilai.id_kriteria = kriteria.id_kriteria
-					INNER JOIN subkriteria ON kriteria.id_kriteria = subkriteria.id_kriteria AND alternatif_nilai.id_subkriteria = subkriteria.id_subkriteria
-					INNER JOIN karyawan ON alternatif.id_karyawan = karyawan.id_karyawan
+					karyawan_nilai
+					INNER JOIN karyawan ON karyawan_nilai.id_karyawan = karyawan.id_karyawan
+					INNER JOIN kriteria ON karyawan_nilai.id_kriteria = kriteria.id_kriteria
+					INNER JOIN subkriteria ON kriteria.id_kriteria = subkriteria.id_kriteria AND karyawan_nilai.id_subkriteria = subkriteria.id_subkriteria
+					INNER JOIN karyawan ON karyawan.id_karyawan = karyawan.id_karyawan
 					WHERE karyawan.id_karyawan = '$id_karyawan'
 				 ";
 				 return $this->db->query($sql);
@@ -73,14 +73,14 @@ class Frontend_model extends CI_Model
     function detail_kriteria($id_karyawan)
     {
     	$sql = " SELECT
-					alternatif_nilai.id_alternatif_nilai,
-					alternatif_nilai.id_alternatif,
-					alternatif_nilai.id_kriteria,
-					alternatif_nilai.id_subkriteria,
-					alternatif.id_alternatif,
-					alternatif.id_karyawan,
-					alternatif.status,
-					alternatif.total,
+					karyawan_nilai.id_karyawan_nilai,
+					karyawan_nilai.id_karyawan,
+					karyawan_nilai.id_kriteria,
+					karyawan_nilai.id_subkriteria,
+					karyawan.id_karyawan,
+					karyawan.id_karyawan,
+					karyawan.status,
+					karyawan.total,
 					kriteria.id_kriteria,
 					kriteria.nama_kriteria,
 					subkriteria.id_subkriteria,
@@ -94,11 +94,11 @@ class Frontend_model extends CI_Model
 					karyawan.misi,
 					karyawan.no_telpon
 					FROM
-					alternatif_nilai
-					INNER JOIN alternatif ON alternatif_nilai.id_alternatif = alternatif.id_alternatif
-					INNER JOIN kriteria ON alternatif_nilai.id_kriteria = kriteria.id_kriteria
-					INNER JOIN subkriteria ON kriteria.id_kriteria = subkriteria.id_kriteria AND alternatif_nilai.id_subkriteria = subkriteria.id_subkriteria
-					INNER JOIN karyawan ON alternatif.id_karyawan = karyawan.id_karyawan
+					karyawan_nilai
+					INNER JOIN karyawan ON karyawan_nilai.id_karyawan = karyawan.id_karyawan
+					INNER JOIN kriteria ON karyawan_nilai.id_kriteria = kriteria.id_kriteria
+					INNER JOIN subkriteria ON kriteria.id_kriteria = subkriteria.id_kriteria AND karyawan_nilai.id_subkriteria = subkriteria.id_subkriteria
+					INNER JOIN karyawan ON karyawan.id_karyawan = karyawan.id_karyawan
 					WHERE karyawan.id_karyawan = '$id_karyawan'
 				 ";
 				 return $this->db->query($sql);

@@ -133,17 +133,17 @@ if(!function_exists('ambil_nilai_subkriteria'))
 	}
 }
 
-if(!function_exists('alternatif_nilai'))
+if(!function_exists('karyawan_nilai'))
 {
-	function alternatif_nilai($alternatifID,$kriteriaID)
+	function karyawan_nilai($karyawanID,$kriteriaID)
 	{
 		$CI=& get_instance();
 		$CI->load->library('m_db');
 		$s=array(
-		'id_alternatif'=>$alternatifID,
+		'id_karyawan'=>$karyawanID,
 		'id_kriteria'=>$kriteriaID,
 		);
-		$item=$CI->m_db->get_row('alternatif_nilai',$s,'id_nilai');
+		$item=$CI->m_db->get_row('karyawan_nilai',$s,'id_nilai');
 		return $item;
 	}
 }
