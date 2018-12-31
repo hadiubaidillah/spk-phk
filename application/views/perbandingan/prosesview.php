@@ -93,7 +93,7 @@ if($c < 1)
 				<!-- <td><?=ucwords($rKaryawan->status);?></td> -->
 				<td>
 					<?php
-					if ($total >= 0.8) {
+					if ($total >= 2) {
 						echo "Karyawan unggulan";
 					}else{
 						echo "belum unggulan";

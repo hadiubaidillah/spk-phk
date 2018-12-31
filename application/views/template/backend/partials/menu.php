@@ -6,9 +6,10 @@
 
 			<div class="navbar-inner">
 				<!-- logo -->
-				<div class="navbar-brand">
+				<div class="navbar-brand" style="padding: 15px 20px 15px 30px;">
 					<a href="<?= base_url('Dashboard') ?>">
-						<img src="<?= base_url() ?>assets/images/logo@2x.png" width="88" height="16" alt="" />
+						<!--<img src="<?= base_url() ?>assets/images/logo@2x.png" width="88" height="16" alt="" />-->
+						<img src="<?= base_url() ?>assets/images/logo-prayoga.png" width="140" height="30" alt="" />
 					</a>
 				</div>
 

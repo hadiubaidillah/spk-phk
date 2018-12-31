@@ -7,13 +7,13 @@ class Perbandingan extends CI_Controller
         parent::__construct();
         $this->load->library('Form_validation');
         $this->load->library('M_db');
-		$this->load->model('Kriteria_model','mod_kriteria');
-		$this->load->model('Proses_model','mod_pro');
-		$this->load->library('Ion_auth');
-		ceklogin();
+    		$this->load->model('Kriteria_model','mod_kriteria');
+    		$this->load->model('Proses_model','mod_pro');
+    		$this->load->library('Ion_auth');
+    		ceklogin();
     }
 
-     function banding()
+    function banding()
     {
         $this->template->load('template/backend/dashboard', 'perbandingan/perbandingan_list');
     }

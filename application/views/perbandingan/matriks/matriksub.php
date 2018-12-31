@@ -20,7 +20,7 @@ $irdata=array(
 
 if(!empty($arr))
 {
-	
+
 
 
 $jumlah=count($arr);
@@ -38,7 +38,7 @@ foreach($irdata as $irk=>$irv)
 
 var maksprio;
 $(document).ready(function () {
-		
+
 <?php
 if(!empty($arr))
 {
@@ -88,23 +88,23 @@ $("#prioform").submit(function(e){
 		url:"<?=base_url();?>Perbandingan/updatesubprioritas",
 		data:$(this).serialize(),
 		error:function(){
-			
+
 		},
 		beforeSend:function(){
-			
+
 		},
 		success:function(x){
-			
+
 		},
 	});
 });
 
 $(".inputnumber").each(function(){
-	$(this).change(function(){		
+	$(this).change(function(){
 		hitung();
 	});
 });
-	
+
 });
 
 function shownotice(tipe,pesan)
@@ -116,7 +116,7 @@ function shownotice(tipe,pesan)
 		setTimeout(function(){
 			$("#respon").hide('fadeOut');
 		},3000);
-	}	
+	}
 }
 
 function contoh()
@@ -130,28 +130,28 @@ function contoh()
 	$("#k3b4").val(9);
 	$("#k3b5").val(9);
 	$("#k4b5").val(9);
-	
+
 }
 
 function hitung()
 {
 	//contoh();
-	
+
 	$(".inputnumber").each(function(){
-	//	$(this).change(function(){		
+	//	$(this).change(function(){
 			var dtarget=$(this).attr('data-target');
 			var dkolom=$(this).attr('data-kolom');
 			var jumlah=$(this).val();
 			var rumus=1/parseFloat(jumlah);
 			var fx=rumus;
 			$("#"+dtarget).val(fx);
-			total();			
+			total();
 			mnk();
 			mptb();
 			rk();
 			//alert(dkolom);
 	//	});
-	});	
+	});
 }
 
 function showmatrix()
@@ -169,7 +169,7 @@ function total()
 		});
 		var fx=sum;
 		$("#total"+i).val(fx);
-	}	
+	}
 }
 
 function mnk()
@@ -179,14 +179,14 @@ function mnk()
 	{
 		var jml=0;
 		for(x=1;x<=<?=$jumlah;?>;x++)
-		{			
+		{
 			var vtarget=$("#k"+i+"b"+x).val();
 			var vkolom=$("#total"+x).val();
 			var rumus=parseFloat(vtarget)/parseFloat(vkolom);
-			var fx=rumus;			
+			var fx=rumus;
 			jml+=parseFloat(rumus);
 			$("#mn-k"+i+"b"+x).val(fx);
-			//$("#mn-k"+i+"b"+x).val(i+" "+x);						
+			//$("#mn-k"+i+"b"+x).val(i+" "+x);
 		}
 		var jumlahmnk=jml;
 		var prio=parseFloat(jml)/parseFloat(<?=$jumlah;?>);
@@ -223,12 +223,12 @@ function mnk2()
 
 
 function mptb()
-{	
+{
 	for(i=1;i<=<?=$jumlah;?>;i++)
 	{
 		var jml=0;
 		for(x=1;x<=<?=$jumlah;?>;x++)
-		{			
+		{
 			var prio=$("#pri-b"+x).val();
 			var nilai=$("#k"+i+"b"+x).val();
 			var rumus=parseFloat(nilai)*parseFloat(prio);
@@ -244,7 +244,7 @@ function mptb()
 
 function rk()
 {
-	var total=0;	
+	var total=0;
 	for(i=1;i<=<?=$jumlah;?>;i++)
 	{
 		var prio=$("#pri-b"+i).val();
@@ -262,7 +262,7 @@ function rk()
 	var summaks=parseFloat(total)/parseFloat(<?=$jumlah;?>);
 	var fx_summaks=summaks;
 	$("#summaks").val(fx_summaks);
-	
+
 	var ci_r_1=parseFloat(summaks)-parseFloat(<?=$jumlah;?>);
 	var ci=parseFloat(ci_r_1)/parseFloat(<?=$jumlah;?>-1);
 	var fx_ci=ci;
@@ -298,19 +298,19 @@ echo form_open('#',array('class'=>'form-horizontal','id'=>'formentri'));
 	<th><?=$v;?></th>
 	<?php
 	}
-	?>	
+	?>
 </thead>
 <tbody>
 	<?php
-	$noUtama=0;	
+	$noUtama=0;
 	foreach($arr as $k2=>$v2)
-	{		
-		$noUtama+=1;				
+	{
+		$noUtama+=1;
 		//array_shift($xxx);
 		echo '<tr>';
 		echo '<td>'.$v2.'</td>';
-		$noSub=0;				
-		$xxx='';				
+		$noSub=0;
+		$xxx='';
 		for($i=1;$i<=$jumlah;$i++)
 		{
 			$keys = array_keys($arr);
@@ -321,9 +321,9 @@ echo form_open('#',array('class'=>'form-horizontal','id'=>'formentri'));
 			{
 				echo '<td><input type="number" id="k'.$noUtama.'b'.$noSub.'" class="form-control kolom'.$noSub.'" value="1" readonly="" title="kolom'.$noSub.'"/></td>';
 			}else{
-				
+
 				if($noUtama > $noSub)
-				{									
+				{
 					echo '<td><input type="text" id="k'.$noUtama.'b'.$noSub.'" class="form-control kolom'.$noSub.'" value="0" readonly="" title="kolom'.$noSub.'"/></td>';
 				}else{
 					echo '<td>';
@@ -339,12 +339,12 @@ echo form_open('#',array('class'=>'form-horizontal','id'=>'formentri'));
 						echo '<option value="'.$x.'" '.$sl.'>'.$x.'</option>';
 					}
 					echo '</select>';
-				}				
+				}
 			}
 		}
 		echo '</tr>';
 	}
-	?>	
+	?>
 </tbody>
 <tfoot>
 	<tr>
@@ -364,7 +364,7 @@ echo form_open('#',array('class'=>'form-horizontal','id'=>'formentri'));
 
 <div class="pull-left">
 	<!-- <a href="javascript:;" onclick="hitung();" class="btn btn-primary">Hitung</a>  -->
-	<a href="javascript:;" onclick="showmatrix();" class="btn btn-info">Lihat Matriks</a>	
+	<a href="javascript:;" onclick="showmatrix();" class="btn btn-info">Lihat Matriks</a>
 	<button type="submit" class="btn btn-success">Simpan Kriteria</button>
 </div>
 
@@ -400,7 +400,7 @@ echo form_close();
 </thead>
 <tbody>
 	<?php
-	$noUtama2=0;	
+	$noUtama2=0;
 	foreach($arr as $k2=>$v2)
 	{
 		$noUtama2+=1;
@@ -415,10 +415,10 @@ echo form_close();
 		echo '<td><input type="text" class="form-control" id="jml-b'.$noUtama2.'" value="0" readonly=""/></td>';
 		echo '<td><input type="text" class="form-control" id="pri-b'.$noUtama2.'" value="0" readonly=""/></td>';
 		echo '<td><input type="text" class="form-control" id="prisub-b'.$noUtama2.'" value="0" readonly=""/></td>';
-		echo '<td><input type="text" name="prio['.$k2.']" class="form-control" id="prisub-bhasil'.$noUtama2.'" value="" readonly=""/></td>';		
+		echo '<td><input type="text" name="prio['.$k2.']" class="form-control" id="prisub-bhasil'.$noUtama2.'" value="" readonly=""/></td>';
 		echo '</tr>';
-	}	
-	?>	
+	}
+	?>
 </tbody>
 </table>
 <?php echo '<button type="submit" class="btn btn-success" style="display:none;">Simpan Prioritas</button>';
@@ -429,7 +429,7 @@ echo form_close();
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
-	<th colspan="<?=$jumlah+1;?>" class="text-center">Matrik Penjumlahan Tiap Baris</th>
+	<th colspan="<?=$jumlah+2;?>" class="text-center">Matrik Penjumlahan Tiap Baris</th>
 </thead>
 <thead>
 	<th>Kriteria</th>
@@ -445,7 +445,7 @@ echo form_close();
 </thead>
 <tbody>
 	<?php
-	$noUtama3=0;	
+	$noUtama3=0;
 	foreach($arr as $k3=>$v3)
 	{
 		$noUtama3+=1;
@@ -460,7 +460,7 @@ echo form_close();
 		echo '<td><input type="text" class="form-control" id="jmlmptb-b'.$noUtama3.'" value="0" readonly=""/></td>';
 		echo '</tr>';
 	}
-	?>	
+	?>
 </tbody>
 </table>
 </div>
@@ -471,25 +471,25 @@ echo form_close();
 	<th colspan="<?=$jumlah+1;?>" class="text-center">Rasio Konsistensi</th>
 </thead>
 <thead>
-	<th>Kriteria</th>	
+	<th>Kriteria</th>
 	<th>Jumlah Per Baris</th>
 	<th>Prioritas</th>
 	<th>Hasil</th>
 </thead>
 <tbody>
 	<?php
-	$noUtama4=0;	
+	$noUtama4=0;
 	foreach($arr as $k4=>$v4)
 	{
 		$noUtama4+=1;
 		echo '<tr>';
-		echo '<td>'.$v4.'</td>';		
+		echo '<td>'.$v4.'</td>';
 		echo '<td><input type="text" class="form-control" id="jmlrk-b'.$noUtama4.'" value="0" readonly=""/></td>';
 		echo '<td><input type="text" class="form-control" id="priork-b'.$noUtama4.'" value="0" readonly=""/></td>';
 		echo '<td><input type="text" class="form-control" id="hasilrk-b'.$noUtama4.'" value="0" readonly=""/></td>';
 		echo '</tr>';
 	}
-	?>	
+	?>
 </tbody>
 <tfoot>
 	<tr>
