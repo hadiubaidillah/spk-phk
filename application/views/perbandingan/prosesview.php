@@ -90,7 +90,7 @@ if($c < 1)
 				}
 				?>
 				<td><?=number_format($total,2);?></td>
-				<!-- <td><?=ucwords($rKaryawan->status);?></td> -->
+				<!-- <td><?=ucwords($rKaryawan->status);?></td> --> 
 				<td>
 					<?php
 					if ($total >= 2.5) {
