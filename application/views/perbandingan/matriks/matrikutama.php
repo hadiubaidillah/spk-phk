@@ -326,8 +326,8 @@ echo form_open('#',array('class'=>'form-horizontal','id'=>'formentri'));
 
 <div class="pull-left">
 	<!-- <a href="javascript:;" onclick="hitung();" class="btn btn-primary">Hitung</a>  -->
-	<a href="javascript:;" onclick="showmatrix();" class="btn btn-info">Lihat Matriks</a>
-	<a href="javascript:;" onclick="showsubkriteria();" class="btn btn-info">Lihat Sub Kriteria</a>
+	<!-- <a href="javascript:;" onclick="showmatrix();" class="btn btn-info">Lihat Matriks</a> -->
+	<!-- <a href="javascript:;" onclick="showsubkriteria();" class="btn btn-info">Lihat Sub Kriteria</a> -->
 	<button type="submit" name="submit" class="btn btn-success">Simpan Kriteria</button>
 </div>
 <?php

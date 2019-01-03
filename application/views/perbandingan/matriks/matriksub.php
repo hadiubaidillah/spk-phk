@@ -364,7 +364,7 @@ echo form_open('#',array('class'=>'form-horizontal','id'=>'formentri'));
 
 <div class="pull-left">
 	<!-- <a href="javascript:;" onclick="hitung();" class="btn btn-primary">Hitung</a>  -->
-	<a href="javascript:;" onclick="showmatrix();" class="btn btn-info">Lihat Matriks</a>
+	<!-- <a href="javascript:;" onclick="showmatrix();" class="btn btn-info">Lihat Matriks</a> -->
 	<button type="submit" class="btn btn-success">Simpan Kriteria</button>
 </div>
 
